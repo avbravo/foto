@@ -70,15 +70,19 @@ public class WebQR implements Serializable {
 //                                    File.separator + "images" + File.separator + "photocam" + File.separator + filename + ".jpeg";
 
         String name = JsfUtil.getUUIDMinusculas();
-//        String newFileName ="/home/avbravo/Descargas/myfoto.png";
+
         String newFileName = "/home/avbravo/Descargas/" + name + ".png";
+
+  
         this.filename=newFileName;
         FileImageOutputStream imageOutput;
         try {
             imageOutput = new FileImageOutputStream(new File(newFileName));
             imageOutput.write(data, 0, data.length);
             imageOutput.close();
-            JsfUtil.successMessage("Imagen guardada " + name + ".png");
+          JsfUtil.successMessage("Imagen guardada " + name + ".png");
+   
+     
             scanQR(this.filename);
         } catch (IOException e) {
             throw new FacesException("Error in writing captured image.", e);
