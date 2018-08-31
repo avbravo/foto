@@ -5,25 +5,24 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
-          <script type="text/javascript"> function captureWebCam() {
+        <script type="text/javascript"> function captureWebCam() {
                 Webcam.set({width: 600, height: 450, image_format: 'png', jpeg_quality: 90});
                 Webcam.attach('#my_camera');
             }</script>
-       
+
     </h:head>
     <h:body>
-      
+
         <h:form>
-             <p:messages id="msg" autoUpdate="true"/>
-         
-          
-             
-                <h:panelGrid>
-                    <p:photoCam widgetVar="pcQR" listener="#{webQR.oncapture}" update="photoQR"
-                                format="jpeg"
-                                jpegQuality="100"/>
+            <p:messages id="msg" autoUpdate="true"/>
+
+
+
+            <h:panelGrid>
+                <p:photoCam widgetVar="pcQR" listener="#{webQR.oncapture}" update="photoQR"
+                            />
                 <p:commandButton type="button" value="Capture QR" onclick="PF('pcQR').capture()"/>
-                  <p:outputPanel id="photoQR">
+                <p:outputPanel id="photoQR">
                     <p:graphicImage name="/home/avbravo/Descargas/#{webQR.filename}.png" rendered="#{not empty webQR.filename}"/>
                 </p:outputPanel>
             </h:panelGrid>

@@ -4,7 +4,7 @@
 
     <groupId>com.avbravo</groupId>
     <artifactId>foto</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1</version>
     <packaging>war</packaging>
 
     <name>foto</name>
@@ -36,19 +36,10 @@
          <dependency>
             <groupId>com.github.avbravo</groupId>
             <artifactId>avbravoutils</artifactId>
-            <version>0.26</version>
+            <version>0.27.1</version>
         </dependency>
         
-         <dependency>
-        <groupId>com.google.zxing</groupId>
-        <artifactId>core</artifactId>
-        <version>3.3.0</version>
-    </dependency>
-    <dependency>
-        <groupId>com.google.zxing</groupId>
-        <artifactId>javase</artifactId>
-        <version>3.3.0</version>
-    </dependency>
+     
     </dependencies>
 
     <build>
@@ -57,7 +48,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.8.0</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -69,7 +60,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.3</version>
+                <version>3.2.2</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>

@@ -6,14 +6,7 @@
 package com.avbravo.foto;
 
 import com.avbravo.avbravoutils.JsfUtil;
-import com.google.zxing.BinaryBitmap;
-import com.google.zxing.LuminanceSource;
-import com.google.zxing.MultiFormatReader;
-import com.google.zxing.NotFoundException;
-import com.google.zxing.Result;
-import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
-import com.google.zxing.common.HybridBinarizer;
-import java.awt.image.BufferedImage;
+import com.avbravo.avbravoutils.QR;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -22,7 +15,6 @@ import javax.faces.FacesException;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageOutputStream;
 import org.primefaces.event.CaptureEvent;
 
@@ -34,35 +26,18 @@ import org.primefaces.event.CaptureEvent;
 @ViewScoped
 public class WebQR implements Serializable {
 
-    private static String decodeQRCode(File qrCodeimage) throws IOException {
-        BufferedImage bufferedImage = ImageIO.read(qrCodeimage);
-        LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
-        BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-
-        try {
-            Result result = new MultiFormatReader().decode(bitmap);
-            return result.getText();
-        } catch (NotFoundException e) {
-            System.out.println("There is no QR code in the image");
-            JsfUtil.errorMessage("There is no QR code in the image: " + e.getLocalizedMessage());
-            return null;
-        }
-    }
+ 
 
     private String filename;
 
-    private String getRandomImageName() {
-        int i = (int) (Math.random() * 10000000);
-
-        return String.valueOf(i);
-    }
+ 
 
     public String getFilename() {
         return filename;
     }
 
     public void oncapture(CaptureEvent captureEvent) {
-        filename = getRandomImageName();
+        filename = "";
         byte[] data = captureEvent.getData();
 
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
@@ -92,11 +67,10 @@ public class WebQR implements Serializable {
 
     public String scanQR(String name) {
         try {
-//            File file = new File("MyQRCode.png");
             File file = new File(name);
-            String decodedText = decodeQRCode(file);
+            String decodedText = QR.decodificarQRCode(name, false);
             if (decodedText == null) {
-                JsfUtil.errorDialog("Error", "No QR Code found in the image");
+                JsfUtil.errorDialog("Error", "No QR Code found in the imageÑ");
                 //System.out.println("No QR Code found in the image");
             } else {
                 JsfUtil.successMessage("Decoded text = " + decodedText);
